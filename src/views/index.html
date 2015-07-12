@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Easy Json</title>
+    </head>
+<body>
+    <div>
+        <h1>Put your JSON base</h1>
+        <hr />
+        <form method="post" action="generate">
+            <fieldset>
+                <textarea name="json_base" rows="10" cols="50" placeholder="Add your json here"></textarea>
+                <div>
+                    <label>Valid for</label>
+                    <select name="valid_time">
+                        <option value="3600">a hour</option>
+                        <option value="86400">a day</option>
+                        <option value="604800">a week</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Ok</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    {% if response %}
+        {% if response.key_object %}
+            <div style="width:100%;">
+                <h1>You can acess your JSON objects here:</h1>
+                <h3>localhost:9000/generate/{{ response.key_object }}</h3>
+            </div>
+            <hr/>
+        {% endif %}
+        {% if response.error %}
+            <div style="width:100%;">
+                <h1>There are some errors:</h1>
+                <h3>{{ response.error }}</h3>
+            </div>
+            <hr/>
+        {% endif %}
+    {% endif %}
+    <div>
+        <h1>Documentation</h1>
+        <hr/>
+        <h2>Operation Guide</h2>
+        <p>Add an structure JSON how do you want, with key and values specific!</p>
+        <hr/>
+        <h2>List of data</h2>
+        <ul>
+            <li>
+                <b>["word"]</b> - create a word.
+            </li>
+            <li>
+                <b>["words", 1]</b> - create a list of words, the second parameter is quantity of words the list must have.
+            </li>
+            <li>
+                <b>["url"]</b> - create an URL of type string.
+            </li>
+            <li>
+                <b>["time"]</b> - create a time with this structure: 00:00:00.
+            </li>
+            <li>
+                <b>["text"]</b> - create a text that contains a specific quantity of caracteres.
+            </li>
+            <li>
+                <b>["street_name"]</b> - create a street name.
+            </li>
+            <li>
+                <b>["random_number", 3]</b> - create a integer random number, the second parameter is quantity of decimal places.
+            </li>
+            <li>
+                <b>["name"]</b> - create a compound person name.
+            </li>
+            <li>
+                <b>["name_female"]</b> - create a compound person name female.
+            </li>
+            <li>
+                <b>["name_male"]</b> - create a compound person name male.
+            </li>
+            <li>
+                <b>email</b> - create a email.
+            </li>
+            <li>
+                <b>["list_email", 10]</b> - create a list of email, the second parameter is quantity of emails the list must have.
+            </li>
+            <li>
+                <b></b>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
