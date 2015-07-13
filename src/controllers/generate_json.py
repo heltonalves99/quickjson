@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import bottle
+import os
 from bottle import Bottle, request
 from bottle import jinja2_template as template
 from bottle import TEMPLATE_PATH
@@ -9,7 +9,7 @@ import uuid
 import redis
 import json
 
-bottle.TEMPLATE_PATH.insert(0, TEMPLATE_PATH)
+TEMPLATE_PATH.insert(0, os.path.join(os.path.dirname(__file__), 'views'))
 
 app = Bottle()
 
