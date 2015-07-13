@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import bottle
 from bottle import Bottle, request
 from bottle import jinja2_template as template
 from bottle import TEMPLATE_PATH
@@ -8,9 +9,9 @@ import uuid
 import redis
 import json
 
-app = Bottle()
+bottle.TEMPLATE_PATH.insert(0, TEMPLATE_PATH)
 
-TEMPLATE_PATH[:] = ['views']
+app = Bottle()
 
 def mount_json(object_base):
     fake = Faker()

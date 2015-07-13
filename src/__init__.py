@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+import bottle
 from bottle import Bottle
 from bottle import static_file
-
+from settings import TEMPLATE_PATH
 from controllers import generate_json
 
+bottle.TEMPLATE_PATH.insert(0, TEMPLATE_PATH)
 
 root_app = Bottle()
 
