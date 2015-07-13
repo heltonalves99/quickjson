@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
-from bottle import debug, run
+from bottle import run
 from bottle import jinja2_template as template
+from bottle import TEMPLATE_PATH
 
 from __init__ import root_app
+
+TEMPLATE_PATH[:] = ['views']
 
 @root_app.route('/', method='GET')
 def index():

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from bottle import Bottle, request
 from bottle import jinja2_template as template
+from bottle import TEMPLATE_PATH
 from faker import Faker
 import pickle
 import uuid
@@ -8,6 +9,8 @@ import redis
 import json
 
 app = Bottle()
+
+TEMPLATE_PATH[:] = ['views']
 
 def mount_json(object_base):
     fake = Faker()
