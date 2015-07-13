@@ -1,95 +1,313 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Easy Json</title>
-    </head>
-<body>
-    <div>
-        <h1>Put your JSON base</h1>
-        <hr />
-        <form method="post" action="generate">
-            <fieldset>
-                <textarea name="json_base" rows="10" cols="50" placeholder="Add your json here"></textarea>
-                <div>
-                    <label>Valid for</label>
-                    <select name="valid_time">
-                        <option value="3600">a hour</option>
-                        <option value="86400">a day</option>
-                        <option value="604800">a week</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit">Ok</button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    {% if response %}
-        {% if response.key_object %}
-            <div style="width:100%;">
-                <h1>You can acess your JSON objects here:</h1>
-                <h3>localhost:9000/generate/{{ response.key_object }}</h3>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>QuickJSON - Quick and easy way to create JSON data!</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">QuickJSON</a>
             </div>
-            <hr/>
-        {% endif %}
-        {% if response.error %}
-            <div style="width:100%;">
-                <h1>There are some errors:</h1>
-                <h3>{{ response.error }}</h3>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#documentation">Documentation</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#examples">Example</a>
+                    </li>
+                </ul>
             </div>
-            <hr/>
-        {% endif %}
-    {% endif %}
-    <div>
-        <h1>Documentation</h1>
-        <hr/>
-        <h2>Operation Guide</h2>
-        <p>Add an structure JSON how do you want, with key and values specific!</p>
-        <hr/>
-        <h2>List of data</h2>
-        <ul>
-            <li>
-                <b>["word"]</b> - create a word.
-            </li>
-            <li>
-                <b>["words", 1]</b> - create a list of words, the second parameter is quantity of words the list must have.
-            </li>
-            <li>
-                <b>["url"]</b> - create an URL of type string.
-            </li>
-            <li>
-                <b>["time"]</b> - create a time with this structure: 00:00:00.
-            </li>
-            <li>
-                <b>["text"]</b> - create a text that contains a specific quantity of caracteres.
-            </li>
-            <li>
-                <b>["street_name"]</b> - create a street name.
-            </li>
-            <li>
-                <b>["random_number", 3]</b> - create a integer random number, the second parameter is quantity of decimal places.
-            </li>
-            <li>
-                <b>["name"]</b> - create a compound person name.
-            </li>
-            <li>
-                <b>["name_female"]</b> - create a compound person name female.
-            </li>
-            <li>
-                <b>["name_male"]</b> - create a compound person name male.
-            </li>
-            <li>
-                <b>email</b> - create a email.
-            </li>
-            <li>
-                <b>["list_email", 10]</b> - create a list of email, the second parameter is quantity of emails the list must have.
-            </li>
-            <li>
-                <b></b>
-            </li>
-        </ul>
-    </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Section -->
+    <section id="intro" class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="/">
+                        <img src="images/logo.png" alt="QuickJSON" />
+                    </a>
+                    <h1>QuickJSON</h1>
+                    <p>Quick and easy way to create JSON data!</p>
+                </div>
+
+                {% if response %}
+                    <div class="col-lg-12">
+                        {% if response.key_object %}
+                            <hr/>
+                            <h3>You can acess your JSON objects here:</h3>
+                            <h4>localhost:9000/generate/{{ response.key_object }}</h4>
+                        {% endif %}
+                        {% if response.error %}
+                            <hr/>
+                            <h3>There are some errors:</h3>
+                            <h4>{{ response.error }}</h4>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="col-lg-12">
+                    <hr />
+                    <h4>Put your JSON base:</h4>
+                    <form class="form-horizontal" method="post" action="generate">
+                        <fieldset>
+                            <div class="form-group">
+                                <textarea class="form-control" name="json_base" rows="8" placeholder="Add your json here"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control col-lg-6" name="valid_time">
+                                    <option value="3600">Valid for a hour</option>
+                                    <option value="86400">Valid for a day</option>
+                                    <option value="604800">Valid for a week</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-default">Send</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="documentation-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Documentation</h1>
+
+                    <h3>Usage guide:</h3>
+                    <ol>
+                        <li>Add an structure JSON how do you want, with key and values specific!</li>
+                        <li>Choice the valid time!</li>
+                        <li>Click on Send!</li>
+                        <li>
+                            A new link is generated with your JSON data, and READY. o/ <br />
+                            Now you can send a GET request on this new link generated and use the will as you wish.<br />
+                            Will return a object JSON with you want.<br />
+                            If you want a object list, just pass the parameter COUNT on the URL.
+                            <p><b>Ex:</b> quickjson.com/as2fcx2jk<b>?count=20</b></p>
+                        </li>
+                    </ol>
+
+                    <h3>List of data:</h3>
+                    <ul>
+                        <li>
+                            <b>["word"]</b> - create a word.
+                        </li>
+                        <li>
+                            <b>["words", 1]</b> - create a list of words, the second parameter is quantity of words the list must have.
+                        </li>
+                        <li>
+                            <b>["url"]</b> - create an URL of type string.
+                        </li>
+                        <li>
+                            <b>["time"]</b> - create a time with this structure: 00:00:00.
+                        </li>
+                        <li>
+                            <b>["text"]</b> - create a text that contains a specific quantity of caracteres.
+                        </li>
+                        <li>
+                            <b>["street_name"]</b> - create a street name.
+                        </li>
+                        <li>
+                            <b>["random_number", 3]</b> - create a integer random number, the second parameter is quantity of decimal places.
+                        </li>
+                        <li>
+                            <b>["name"]</b> - create a compound person name.
+                        </li>
+                        <li>
+                            <b>["name_female"]</b> - create a compound person name female.
+                        </li>
+                        <li>
+                            <b>["name_male"]</b> - create a compound person name male.
+                        </li>
+                        <li>
+                            <b>email</b> - create a email.
+                        </li>
+                        <li>
+                            <b>["list_email", 10]</b> - create a list of email, the second parameter is quantity of emails the list must have.
+                        </li>
+                        <li>
+                            <b>["year"]</b> - create a year with four digits.
+                        </li>
+                        <li>
+                            <b>["uuid4"]</b> - create a ID of uuid4 type.
+                        </li>
+                        <li>
+                            <b>["user_name"]</b> - create a user name.
+                        </li>
+                        <li>
+                            <b>["url"]</b> - create a url of a site.
+                        </li>
+                        <li>
+                            <b>["timezone"]</b> - create a timezone. Ex: Europe/Prague
+                        </li>
+                        <li>
+                            <b>["street_address"]</b> - create a street address name. Ex: 500 Lossie Green
+                        </li>
+                        <li>
+                            <b>["state"]</b> - create a state. Ex: Minnesota
+                        </li>
+                        <li>
+                            <b>["slug"]</b> - create a slug. Ex: molestiae-autem-coisa
+                        </li>
+                        <li>
+                            <b>["safe_hex_color"]</b> - create a color in hex format. Ex: #33ee00
+                        </li>
+                        <li>
+                            <b>["rgb_color"]</b> - create a rgb color. Ex: 156,144,194
+                        </li>
+                        <li>
+                            <b>["mime_type"]</b> - create a MIME type. Ex: multipart/encrypted
+                        </li>
+                        <li>
+                            <b>["locale"]</b> - create a locale. Ex: pt_BR
+                        </li>
+                        <li>
+                            <b>["month"]</b> - create a month in number. Ex: 12
+                        </li>
+                        <li>
+                            <b>["month_name"]</b> - create a month name. Ex: February
+                        </li>
+                        <li>
+                            <b>["first_name"]</b> - create a first name.
+                        </li>
+                        <li>
+                            <b>["first_name_female"]</b> - create a first female name.
+                        </li>
+                        <li>
+                            <b>["first_name_male"]</b> -create a first male name.
+                        </li>
+                        <li>
+                            <b>["file_name"]</b> - create a file name. Ex: optio.txt
+                        </li>
+                        <li>
+                            <b>["file_extension"]</b> - create a file extension. Ex: .txt
+                        </li>
+                        <li>
+                            <b>["day_of_week"]</b> - create a day name of the week. Ex: Monday
+                        </li>
+                        <li>
+                            <b>["day_of_month"]</b> - create the number of the day of month. Ex: 23
+                        </li>
+                        <li>
+                            <b>["credit_card_provider"]</b> - create a name of credit card provider. Ex: Mastercard
+                        </li>
+                        <li>
+                            <b>["credit_card_number"]</b> - create a credit card number. Ex: 869992095432728
+                        </li>
+                        <li>
+                            <b>["country"]</b> - create a country name. Ex: Brazil
+                        </li>
+                        <li>
+                            <b>["country_code"]</b> - create a country code. Ex: BR
+                        </li>
+                        <li>
+                            <b>["color_name"]</b> - create a color name: Ex: WhiteSmoke
+                        </li>
+                        <li>
+                            <b>["city"]</b> - create a city name. Ex: São Luis
+                        </li>
+                        <li>
+                            <b>["boolean"]</b> - create a boolean, true or falsa.
+                        </li>
+                        <li>
+                            <b>["date"]</b> - create a date. Ex: 1982-07-30
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Section -->
+    <section id="examples" class="examples-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Example usage</h1>
+                    <hr />
+                    <h4>structure simple JSON</h4>
+                    <div style="text-align: left;">
+                        <script src="https://gist.github.com/heltonalves99/de275f29b835bfd0fe88.js"></script>
+                    </div>
+                    <h4>structure with multiple JSON</h4>
+                    <div style="text-align: left;">
+                        <script src="https://gist.github.com/heltonalves99/0843c94e8b4db600e262.js"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <footer class="footer-site">
+        <div class="container">
+            <p>
+                Coded and built by <a href="https://github.com/heltonalves99">heltonalves99</a>.
+                Source code available on <a href="https://github.com/heltonalves99/quickjson">GitHub</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/scrolling-nav.js"></script>
+
 </body>
+
 </html>
