@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from bottle import Bottle, request
+from bottle import Bottle, request, response
 from bottle import jinja2_template as template
 from bottle import TEMPLATE_PATH
 from faker import Faker
@@ -42,15 +42,15 @@ def mount_json(object_base):
 
 @app.route('/', method='POST')
 def index():
-    response = {}
+    result = {}
     valid_time = int(request.forms.get('valid_time'))
     json_base = request.forms.get('json_base')
 
     try:
         object_base = json.loads(json_base)
         if not mount_json(object_base):
-            response['error'] = 'Error trying convert the base JSON.'
-            return template('index.html', {'response': response})
+            result['error'] = 'Error trying convert the base JSON.'
+            return template('index.html', {'response': result})
 
         key_object = uuid.uuid4().hex[:12]
         # Connection with Redis
@@ -59,16 +59,16 @@ def index():
         r_server.set(redis_key, pickle.dumps(object_base))
         r_server.expire(redis_key, valid_time)
 
-        response['key_object'] = key_object
+        result['key_object'] = key_object
     except ValueError:
-        response['error'] = 'Error trying convert the base JSON.'
+        result['error'] = 'Error trying convert the base JSON.'
 
-    return template('index.html', {'response': response})
+    return template('index.html', {'response': result})
 
 
 @app.route('/<uid>', method='GET')
 def generate_json(uid):
-    response = {}
+    result = {}
     r_server = redis.Redis()
     obj_json = r_server.get(uid)
 
@@ -76,11 +76,12 @@ def generate_json(uid):
         obj_json = pickle.loads(obj_json)
         try:
             count = int(request.query.get('count', ''))
-            response = [mount_json(obj_json) for n in range(count)]
+            result = [mount_json(obj_json) for n in range(count)]
         except ValueError:
-            response = mount_json(obj_json)
+            result = mount_json(obj_json)
 
-        return json.dumps(response)
+        response.content_type = 'application/json'
+        return json.dumps(result)
 
-    response['error'] = 'URL invalid or expired!'
-    return json.dumps(response)
+    result['error'] = 'URL invalid or expired!'
+    return json.dumps(result)

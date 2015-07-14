@@ -11,7 +11,6 @@ root_app = Bottle()
 @root_app.route('/:path#(images|css|js|fonts)\/.+#')
 def server_static(path):
     static_path = os.path.join(os.path.dirname(__file__), '../public/static')
-    print static_path
     return static_file(path, root=static_path)
 
 

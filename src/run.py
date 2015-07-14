@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import bottle
 from bottle import run
 from bottle import jinja2_template as template
 
@@ -12,4 +11,4 @@ def index():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    run(root_app, host='0.0.0.0', port=port)
+    run(root_app, host='0.0.0.0', port=port, debug=True)
