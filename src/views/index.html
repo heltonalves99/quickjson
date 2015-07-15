@@ -96,7 +96,9 @@
                         {% if response.key_object %}
                             <hr/>
                             <h3>You can acess your JSON objects here:</h3>
-                            <h4>http://quickjson.com/generate/{{ response.key_object }}</h4>
+                            <button onclick="copyToClipboard('generated_url')">copy </button>
+                            <input type="text" value="http://quickjson.com/generate/{{ response.key_object }}" id="generated_url"></input>
+                            <a href="http://quickjson.com/generate/{{ response.key_object }}" target="_blank"> open</a>
                         {% endif %}
                         {% if response.error %}
                             <hr/>
@@ -140,19 +142,18 @@
 
                     <h3>How to use:</h3>
                     <ol>
-                        <li>Add a wanted JSON structure, with key and values specific!</li>
-                        <li>Choose the valid time!</li>
-                        <li>Click on Send!</li>
-                        <li>
-                            A new link is generated with your JSON data, and that's it! o/ <br />
-                            Now you can send a GET request on the generated link and use it as you wish.<br />
-                            It will return an JSON object JSON with your data.<br />
-                            If you want an object list, just pass to URL the parameter <b>count</b>.
-                            <p><b>Ex:</b> quickjson.com/as2fcx2jk<b>?count=20</b></p>
-                        </li>
+                        <li> Add a wanted JSON structure, with specific keys and use <a href="https://github.com/heltonalves99/quickjson#list-of-valid-placeholders-for-generated-values">placeholders for values</a></li>
+                        <li> Choose the expiration time (hour, day or week)</li>
+                        <li> Click on Send!</li>
+                        <li><p>A new link is generated with your JSON data, and that's it! o/
+                        Now you can send a GET request on the generated link and use it as you wish.
+                         It will return an JSON object with your data.
+                         If you want an object list, just pass to URL the parameter <strong>count</strong>.</p>
+
+                        <p><strong>Ex:</strong> quickjson.com/as2fcx2jk<strong>?count=20</strong></p></li>
                     </ol>
 
-                    <h3>List of data:</h3>
+                    <h3 id="list-of-valid-placeholders-for-generated-values">List of valid placeholders for generated values:</h3>
                     <ul>
                         <li>
                             <b>["user_name"]</b> - create an user name.
@@ -334,6 +335,19 @@
     <!-- Scrolling Nav JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/scrolling-nav.js"></script>
+    <script type="text/javascript">
+        function copyToClipboard(elementId) {
+          var aux = document.createElement("input");
+          aux.setAttribute("type", "text");
+          aux.setAttribute("id", "temp");
+          aux.setAttribute("style", "position:absolute;opacity:0;");
+          aux.setAttribute("value", document.getElementById(elementId).value);
+          document.body.appendChild(aux);
+          aux.select();
+          document.execCommand("copy");
+          document.body.removeChild(aux);
+        }
+    </script>
 
 </body>
 
