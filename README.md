@@ -28,7 +28,7 @@
 *   **["name"]** - create a compound person name.
 *   **["name_female"]** - create a compound female person name.
 *   **["name_male"]** - create a compound male person name.
-*   **email** - create na email.
+*   **["email]** - create an email.
 *   **["list_email", 10]** - create a list of email, the second parameter is the quantity of emails the list must have.
 *   **["year"]** - create a year with four digits (YYYY).
 *   **["uuid4"]** - create an uuid4 type ID.

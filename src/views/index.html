@@ -138,16 +138,16 @@
                 <div class="col-lg-12">
                     <h1>Documentation</h1>
 
-                    <h3>Usage guide:</h3>
+                    <h3>How to use:</h3>
                     <ol>
-                        <li>Add an structure JSON how do you want, with key and values specific!</li>
-                        <li>Choice the valid time!</li>
+                        <li>Add a wanted JSON structure, with key and values specific!</li>
+                        <li>Choose the valid time!</li>
                         <li>Click on Send!</li>
                         <li>
-                            A new link is generated with your JSON data, and READY. o/ <br />
-                            Now you can send a GET request on this new link generated and use the will as you wish.<br />
-                            Will return a object JSON with you want.<br />
-                            If you want a object list, just pass the parameter COUNT on the URL.
+                            A new link is generated with your JSON data, and that's it! o/ <br />
+                            Now you can send a GET request on the generated link and use it as you wish.<br />
+                            It will return an JSON object JSON with your data.<br />
+                            If you want an object list, just pass to URL the parameter <b>count</b>.
                             <p><b>Ex:</b> quickjson.com/as2fcx2jk<b>?count=20</b></p>
                         </li>
                     </ol>
@@ -155,16 +155,16 @@
                     <h3>List of data:</h3>
                     <ul>
                         <li>
-                            <b>["user_name"]</b> - create a user name.
+                            <b>["user_name"]</b> - create an user name.
                         </li>
                         <li>
                             <b>["name"]</b> - create a compound person name.
                         </li>
                         <li>
-                            <b>["name_female"]</b> - create a compound person name female.
+                            <b>["name_female"]</b> - create a compound female person name.
                         </li>
                         <li>
-                            <b>["name_male"]</b> - create a compound person name male.
+                            <b>["name_male"]</b> - create a compound male person name.
                         </li>
                         <li>
                             <b>["first_name"]</b> - create a first name, male or female.
@@ -182,10 +182,10 @@
                             <b>["words", 1]</b> - create a list of words, the second parameter is quantity of words the list must have.
                         </li>
                         <li>
-                            <b>["text"]</b> - create a text that contains a specific quantity of caracteres.
+                            <b>["text", 100]</b> - create a text containing a specific quantity of characters, the second parameter is the quantity of characters.
                         </li>
                         <li>
-                            <b>["random_number", 3]</b> - create a integer random number, the second parameter is quantity of decimal places.
+                            <b>["random_number", 3]</b> - create a integer random number, the second parameter is the quantity of decimal places.
                         </li>
                         <li>
                             <b>["street_name"]</b> - create a street name.
@@ -206,25 +206,25 @@
                             <b>["country_code"]</b> - create a country code. Ex: BR
                         </li>
                         <li>
-                            <b>["date"]</b> - create a date. Ex: 1982-07-30
+                            <b>["date"]</b> - create a ISO formated date. Ex: 1982-07-30
                         </li>
                         <li>
-                            <b>["day_of_week"]</b> - create a day name of the week. Ex: Monday
+                            <b>["day_of_week"]</b> - create a named day of the week. Ex: Monday
                         </li>
                         <li>
-                            <b>["day_of_month"]</b> - create the number of the day of month. Ex: 23
+                            <b>["day_of_month"]</b> - create a day number. Ex: 23
                         </li>
                         <li>
-                            <b>["month"]</b> - create a month in number. Ex: 12
+                            <b>["month"]</b> - create a month number. Ex: 12
                         </li>
                         <li>
                             <b>["month_name"]</b> - create a month name. Ex: February
                         </li>
                         <li>
-                            <b>["year"]</b> - create a year with four digits.
+                            <b>["year"]</b> - create a year with four digits (YYYY).
                         </li>
                         <li>
-                            <b>["time"]</b> - create a time with this structure: 00:00:00.
+                            <b>["time"]</b> - create a time with HH:MM:SS structure.
                         </li>
                         <li>
                             <b>["timezone"]</b> - create a timezone. Ex: Europe/Prague
@@ -233,10 +233,10 @@
                             <b>["locale"]</b> - create a locale. Ex: pt_BR
                         </li>
                         <li>
-                            <b>["email"]</b> - create a email.
+                            <b>["email"]</b> - create an email.
                         </li>
                         <li>
-                            <b>["list_email", 10]</b> - create a list of email, the second parameter is quantity of emails the list must have.
+                            <b>["list_email", 10]</b> - create a list of email, the second parameter is the quantity of emails the list must have.
                         </li>
                         <li>
                             <b>["file_name"]</b> - create a file name. Ex: optio.txt
@@ -260,7 +260,7 @@
                             <b>["credit_card_number"]</b> - create a credit card number. Ex: 869992095432728
                         </li>
                         <li>
-                            <b>["uuid4"]</b> - create a ID of uuid4 type.
+                            <b>["uuid4"]</b> - create an uuid4 type ID.
                         </li>
                         <li>
                             <b>["url"]</b> - create a url of a site.
