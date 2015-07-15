@@ -5,6 +5,7 @@ from bottle import jinja2_template as template
 
 from __init__ import root_app
 
+
 @root_app.route('/', method='GET')
 def index():
     return template('index.html', {})

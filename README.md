@@ -4,36 +4,36 @@
 
 # Documentation
 
-### Usage guide:
+### How to use:
 
-1.  Add an structure JSON how do you want, with key and values specific!
-2.  Choice the valid time!
+1.  Add a wanted JSON structure, with key and values specific!
+2.  Choose the valid time!
 3.  Click on Send!
-4.  A new link is generated with your JSON data, and READY. o/
-    Now you can send a GET request on this new link generated and use the will as you wish.  
-     Will return a object JSON with you want.  
-     If you want a object list, just pass the parameter COUNT on the URL.
+4.  A new link is generated with your JSON data, and that's it! o/
+    Now you can send a GET request on the generated link and use it as you wish.
+     It will return an JSON object JSON with your data.
+     If you want an object list, just pass to URL the parameter **count**.
 
     **Ex:** quickjson.com/as2fcx2jk**?count=20**
 
 ### List of data:
 
 *   **["word"]** - create a word.
-*   **["words", 1]** - create a list of words, the second parameter is quantity of words the list must have.
+*   **["words", 1]** - create a list of words, the second parameter is the quantity of words the list must have.
 *   **["url"]** - create an URL of type string.
-*   **["time"]** - create a time with this structure: 00:00:00.
-*   **["text"]** - create a text that contains a specific quantity of caracteres.
+*   **["time"]** - create a time with HH:MM:SS structure.
+*   **["text"]** - create a text containing a specific quantity of caracteres.
 *   **["street_name"]** - create a street name.
-*   **["random_number", 3]** - create a integer random number, the second parameter is quantity of decimal places.
+*   **["random_number", 3]** - create an integer random number, the second parameter is the quantity of decimal places.
 *   **["name"]** - create a compound person name.
-*   **["name_female"]** - create a compound person name female.
-*   **["name_male"]** - create a compound person name male.
-*   **email** - create a email.
-*   **["list_email", 10]** - create a list of email, the second parameter is quantity of emails the list must have.
-*   **["year"]** - create a year with four digits.
-*   **["uuid4"]** - create a ID of uuid4 type.
-*   **["user_name"]** - create a user name.
-*   **["url"]** - create a url of a site.
+*   **["name_female"]** - create a compound female person name.
+*   **["name_male"]** - create a compound male person name.
+*   **email** - create na email.
+*   **["list_email", 10]** - create a list of email, the second parameter is the quantity of emails the list must have.
+*   **["year"]** - create a year with four digits (YYYY).
+*   **["uuid4"]** - create an uuid4 type ID.
+*   **["user_name"]** - create an user name.
+*   **["url"]** - create an url of a site.
 *   **["timezone"]** - create a timezone. Ex: Europe/Prague
 *   **["street_address"]** - create a street address name. Ex: 500 Lossie Green
 *   **["state"]** - create a state. Ex: Minnesota
@@ -42,15 +42,15 @@
 *   **["rgb_color"]** - create a rgb color. Ex: 156,144,194
 *   **["mime_type"]** - create a MIME type. Ex: multipart/encrypted
 *   **["locale"]** - create a locale. Ex: pt_BR
-*   **["month"]** - create a month in number. Ex: 12
+*   **["month"]** - create a month number. Ex: 12
 *   **["month_name"]** - create a month name. Ex: February
 *   **["first_name"]** - create a first name.
 *   **["first_name_female"]** - create a first female name.
 *   **["first_name_male"]** -create a first male name.
 *   **["file_name"]** - create a file name. Ex: optio.txt
 *   **["file_extension"]** - create a file extension. Ex: .txt
-*   **["day_of_week"]** - create a day name of the week. Ex: Monday
-*   **["day_of_month"]** - create the number of the day of month. Ex: 23
+*   **["day_of_week"]** - create a named day of week. Ex: Monday
+*   **["day_of_month"]** - create a day number. Ex: 23
 *   **["credit_card_provider"]** - create a name of credit card provider. Ex: Mastercard
 *   **["credit_card_number"]** - create a credit card number. Ex: 869992095432728
 *   **["country"]** - create a country name. Ex: Brazil
@@ -58,4 +58,4 @@
 *   **["color_name"]** - create a color name: Ex: WhiteSmoke
 *   **["city"]** - create a city name. Ex: São Luis
 *   **["boolean"]** - create a boolean, true or falsa.
-*   **["date"]** - create a date. Ex: 1982-07-30
+*   **["date"]** - create a ISO formated date. Ex: 1982-07-30

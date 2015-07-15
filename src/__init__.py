@@ -8,6 +8,7 @@ TEMPLATE_PATH.insert(0, os.path.join(os.path.dirname(__file__), 'views'))
 
 root_app = Bottle()
 
+
 @root_app.route('/:path#(images|css|js|fonts)\/.+#')
 def server_static(path):
     static_path = os.path.join(os.path.dirname(__file__), '../public/static')
