@@ -6,17 +6,17 @@
 
 ### How to use:
 
-1.  Add a wanted JSON structure, with key and values specific!
-2.  Choose the valid time!
+1.  Add a wanted JSON structure, with specific keys and use [placeholders for values](https://github.com/heltonalves99/quickjson#list-of-data)
+2.  Choose the expiration time (hour, day or week)
 3.  Click on Send!
 4.  A new link is generated with your JSON data, and that's it! o/
     Now you can send a GET request on the generated link and use it as you wish.
-     It will return an JSON object JSON with your data.
+     It will return an JSON object with your data.
      If you want an object list, just pass to URL the parameter **count**.
 
     **Ex:** quickjson.com/as2fcx2jk**?count=20**
 
-### List of data:
+### List of valid placeholders for generated values:
 
 *   **["word"]** - create a word.
 *   **["words", 1]** - create a list of words, the second parameter is the quantity of words the list must have.
