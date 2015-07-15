@@ -4,6 +4,7 @@ from bottle import Bottle, request, response
 from bottle import jinja2_template as template
 from bottle import TEMPLATE_PATH
 from faker import Faker
+import urlparse
 import pickle
 import uuid
 import redis
@@ -15,6 +16,8 @@ app = Bottle()
 
 def mount_json(object_base):
     fake = Faker()
+    fake.__dict__['list_email'] = ''
+    fake.__dict__['from'] = ''
     obj = {}
     for key, value in object_base.items():
         if isinstance(value, dict):
@@ -25,6 +28,16 @@ def mount_json(object_base):
                 try:
                     if value[0] == 'list_email':
                         obj[key] = [fake.email() for n in range(value[1])]
+                        continue
+                    if value[0] == 'from':
+                        url_from = urlparse.urlsplit(value[1])
+                        uid_from = url_from.path.split('/')[2]
+                        try:
+                            count_from = url_from.query.split('=')[1]
+                        except IndexError:
+                            count_from = ''
+
+                        obj[key] = generate_json(uid_from, count_from)
                         continue
 
                     func = getattr(fake, value[0])
@@ -38,6 +51,23 @@ def mount_json(object_base):
             break
 
     return obj
+
+
+def generate_json(uid, count):
+    result = {}
+    r_server = redis.Redis()
+    obj_json = r_server.get(uid)
+
+    if obj_json:
+        obj_json = pickle.loads(obj_json)
+        try:
+            result = [mount_json(obj_json) for n in range(int(count))]
+        except ValueError:
+            result = mount_json(obj_json)
+        return result
+
+    result['error'] = 'URL invalid or expired!'
+    return result
 
 
 @app.route('/', method='POST')
@@ -67,21 +97,7 @@ def index():
 
 
 @app.route('/<uid>', method='GET')
-def generate_json(uid):
-    result = {}
-    r_server = redis.Redis()
-    obj_json = r_server.get(uid)
-
-    if obj_json:
-        obj_json = pickle.loads(obj_json)
-        try:
-            count = int(request.query.get('count', ''))
-            result = [mount_json(obj_json) for n in range(count)]
-        except ValueError:
-            result = mount_json(obj_json)
-
-        response.content_type = 'application/json'
-        return json.dumps(result)
-
-    result['error'] = 'URL invalid or expired!'
-    return json.dumps(result)
+def get_json(uid):
+    count = request.query.get('count', '')
+    response.content_type = 'application/json'
+    return json.dumps(generate_json(uid, count))
