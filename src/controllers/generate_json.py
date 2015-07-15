@@ -5,6 +5,7 @@ from bottle import jinja2_template as template
 from bottle import TEMPLATE_PATH
 from faker import Faker
 import urlparse
+import requests
 import pickle
 import uuid
 import redis
@@ -32,13 +33,16 @@ def mount_json(object_base):
                         continue
                     if value[0] == 'from':
                         url_from = urlparse.urlsplit(value[1])
-                        uid_from = url_from.path.split('/')[2]
-                        try:
-                            count_from = url_from.query.split('=')[1]
-                        except IndexError:
-                            count_from = ''
+                        if url_from.netloc == 'quickjson.com':
+                            uid_from = url_from.path.split('/')[2]
+                            try:
+                                count_from = url_from.query.split('=')[1]
+                            except IndexError:
+                                count_from = ''
 
-                        obj[key] = generate_json(uid_from, count_from)
+                            obj[key] = generate_json(uid_from, count_from)
+                            continue
+                        obj[key] = requests.get(value[1]).json()
                         continue
 
                     func = getattr(fake, value[0])
