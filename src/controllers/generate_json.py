@@ -14,6 +14,7 @@ TEMPLATE_PATH.insert(0, os.path.join(os.path.dirname(__file__), 'views'))
 
 app = Bottle()
 
+
 def mount_json(object_base):
     fake = Faker()
     fake.__dict__['list_email'] = ''
@@ -79,7 +80,7 @@ def index():
     try:
         object_base = json.loads(json_base)
         if not mount_json(object_base):
-            result['error'] = 'Error trying convert the base JSON.'
+            result['error'] = 'Error converting the base JSON.'
             return template('index.html', {'response': result})
 
         key_object = uuid.uuid4().hex[:12]
@@ -91,7 +92,7 @@ def index():
 
         result['key_object'] = key_object
     except ValueError:
-        result['error'] = 'Error trying convert the base JSON.'
+        result['error'] = 'Error converting the base JSON.'
 
     return template('index.html', {'response': result})
 
