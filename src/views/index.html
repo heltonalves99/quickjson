@@ -96,7 +96,9 @@
                         {% if response.key_object %}
                             <hr/>
                             <h3>You can acess your JSON objects here:</h3>
-                            <h4>http://quickjson.com/generate/{{ response.key_object }}</h4>
+                            <button onclick="copyToClipboard('generated_url')">copy </button>
+                            <input type="text" value="http://quickjson.com/generate/{{ response.key_object }}" id="generated_url"></input>
+                            <a href="http://quickjson.com/generate/{{ response.key_object }}" target="_blank"> open</a>
                         {% endif %}
                         {% if response.error %}
                             <hr/>
@@ -334,6 +336,19 @@
     <!-- Scrolling Nav JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/scrolling-nav.js"></script>
+    <script type="text/javascript">
+        function copyToClipboard(elementId) {
+          var aux = document.createElement("input");
+          aux.setAttribute("type", "text");
+          aux.setAttribute("id", "temp");
+          aux.setAttribute("style", "position:absolute;opacity:0;");
+          aux.setAttribute("value", document.getElementById(elementId).value);
+          document.body.appendChild(aux);
+          aux.select();
+          document.execCommand("copy");
+          document.body.removeChild(aux);
+        }
+    </script>
 
 </body>
 
