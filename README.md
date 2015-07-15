@@ -6,7 +6,7 @@
 
 ### How to use:
 
-1.  Add a wanted JSON structure, with specific keys and use [placeholders for values](https://github.com/heltonalves99/quickjson#list-of-data)
+1.  Add a wanted JSON structure, with specific keys and use [placeholders for values](https://github.com/heltonalves99/quickjson#list-of-valid-placeholders-for-generated-values)
 2.  Choose the expiration time (hour, day or week)
 3.  Click on Send!
 4.  A new link is generated with your JSON data, and that's it! o/
