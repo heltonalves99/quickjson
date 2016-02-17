@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from bottle import Bottle, TEMPLATE_PATH
+from bottle import hook, Bottle, TEMPLATE_PATH
 from bottle import static_file
 from controllers import generate_json
 
@@ -13,6 +13,10 @@ root_app = Bottle()
 def server_static(path):
     static_path = os.path.join(os.path.dirname(__file__), '../public/static')
     return static_file(path, root=static_path)
+
+@hook('after_request')
+def enable_cors():
+    response.headers['Access-Control-Allow-Origin'] = '*'
 
 
 root_app.mount('/generate', generate_json.app)
