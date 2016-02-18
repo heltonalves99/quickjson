@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import bottle
+from bottle import response
 
 
 def enable_cors(fn):
