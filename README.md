@@ -60,3 +60,5 @@
 *   **["boolean"]** - create a boolean, true or falsa.
 *   **["date"]** - create a ISO formated date. Ex: 1982-07-30
 *   **["from", "http://quickjson.com/generate/10c110fbba64?count=3"]** - Import another quickjson or existing json endpoint.
+
+* Web site: http://quickjson.com/
