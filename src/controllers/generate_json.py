@@ -11,6 +11,10 @@ import uuid
 import redis
 import json
 
+from __init__ import enable_cors
+
+
+
 TEMPLATE_PATH.insert(0, os.path.join(os.path.dirname(__file__), 'views'))
 
 app = Bottle()
@@ -102,6 +106,7 @@ def index():
 
 
 @app.route('/<uid>', method='GET')
+@enable_cors
 def get_json(uid):
     count = request.query.get('count', '')
     response.content_type = 'application/json'
