@@ -14,7 +14,6 @@ import json
 from __init__ import enable_cors
 
 
-
 TEMPLATE_PATH.insert(0, os.path.join(os.path.dirname(__file__), 'views'))
 
 app = Bottle()
@@ -23,6 +22,8 @@ app = Bottle()
 def mount_json(object_base):
     fake = Faker()
     fake.__dict__['list_email'] = ''
+    fake.__dict__['image'] = ''
+    fake.__dict__['list_image'] = ''
     fake.__dict__['from'] = ''
     obj = {}
     for key, value in object_base.items():
@@ -34,6 +35,12 @@ def mount_json(object_base):
                 try:
                     if value[0] == 'list_email':
                         obj[key] = [fake.email() for n in range(value[1])]
+                        continue
+                    if value[0] == 'image':
+                        obj[key] = 'http://placehold.it/{}'.format(value[1])
+                        continue
+                    if value[0] == 'list_image':
+                        obj[key] = ['http://placehold.it/{}'.format(value[1]) for n in range(value[2])]
                         continue
                     if value[0] == 'from':
                         url_from = urlparse.urlsplit(value[1])

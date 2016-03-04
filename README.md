@@ -60,3 +60,5 @@
 *   **["boolean"]** - create a boolean, true or falsa.
 *   **["date"]** - create a ISO formated date. Ex: 1982-07-30
 *   **["from", "http://quickjson.com/generate/10c110fbba64?count=3"]** - Import another quickjson or existing json endpoint.
+*   **["image", "100x100"]** - Create a URL to image through placehold.it, The parameters are the key of placeholde and size specification (ex: "200x10").
+*   **["list_image", "100x100", 10]** - Create a list of URL to images through placehold.it, The parameters are the key of placeholde, size specification (ex: "200x10") and last one is a integer with the amount of images list.
