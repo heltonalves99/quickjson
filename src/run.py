@@ -10,6 +10,7 @@ from __init__ import root_app
 def index():
     return template('index.html', {})
 
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     run(root_app, host='0.0.0.0', port=port, debug=True, reloader=True)

@@ -40,7 +40,10 @@ def mount_json(object_base):
                         obj[key] = 'http://placehold.it/{}'.format(value[1])
                         continue
                     if value[0] == 'list_image':
-                        obj[key] = ['http://placehold.it/{}'.format(value[1]) for n in range(value[2])]
+                        obj[key] = [
+                            'http://placehold.it/{}'.format(value[1])
+                            for n in range(value[2])
+                        ]
                         continue
                     if value[0] == 'from':
                         url_from = urlparse.urlsplit(value[1])
