@@ -1,0 +1,1 @@
+export { quickjson } from './quickjson';

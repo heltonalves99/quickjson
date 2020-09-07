@@ -1,8 +1,15 @@
 import express from 'express';
 
+import { quickjson } from '../utils';
+
 const api = async (req: express.Request, res: express.Response) => {
   res.json({
-    message: 'Test Here!',
+    data: quickjson({
+      user: ['name.findName'],
+      email: ['internet.email'],
+      imgs: ['image.image', 10],
+      test: ['-- {{lorem.word}} - {{lorem.word}} --'],
+    }),
   });
 };
 
