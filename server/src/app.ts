@@ -1,33 +1,65 @@
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import express, { Express } from 'express';
+import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import hpp from 'hpp';
 
-import api from './api';
+import Route from './interfaces/routes';
+import db from './db';
+import { errorMiddleware, notFoundMiddleware } from './middlewares/error';
 
-import { notFound, errorHandler } from './app-middlewares';
+class App {
+  public app: express.Application;
 
-export default function newApp(): Express {
-  const app = express();
-  app.use(cors());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  app.use(morgan('common'));
-  app.use(helmet());
+  public port: (string | number);
 
+  public env: boolean;
 
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Hello World!',
-      user: 'Helton Alves',
+  constructor(routes: Route[]) {
+    this.app = express();
+    this.port = process.env.PORT || 3000;
+    this.env = process.env.NODE_ENV === 'production';
+
+    this.initializeMiddlewares();
+    this.initializeRoutes(routes);
+    this.initializeErrorHandling();
+  }
+
+  public listen(): void {
+    this.app.listen(this.port, async () => {
+      await db();
+      console.log(`App listening on the port ${this.port}`);
     });
-  });
+  }
 
+  public getServer(): express.Application {
+    return this.app;
+  }
 
-  app.use('/api', api);
+  private initializeMiddlewares(): void {
+    if (this.env) {
+      this.app.use(hpp());
+      this.app.use(helmet());
+    }
 
-  app.use(notFound);
-  app.use(errorHandler);
+    this.app.use(morgan('common'));
+    this.app.use(cors());
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cookieParser());
+  }
 
-  return app;
+  private initializeRoutes(routes: Route[]): void {
+    routes.forEach((route: Route) => {
+      this.app.use('/', route.router);
+    });
+  }
+
+  private initializeErrorHandling() {
+    this.app.use(notFoundMiddleware);
+    this.app.use(errorMiddleware);
+  }
 }
+
+export default App;
